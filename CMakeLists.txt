@@ -3,27 +3,22 @@ project(CPP VERSION 0.1.0)
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 
-# GoogleTest requires at least C++11
+# Set include directory for header files
+include_directories("include") #API header files included via parent CMake
+
 set(CMAKE_CXX_STANDARD 11)
 
-# Locate GTest
-find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
-
-enable_testing()
-
 set(sources
-    main.cpp
-    Bitmap.cpp
-    FractalCreator.cpp
-    RGB.cpp
-    Mandelbrot.cpp
-    ZoomList.cpp)
-add_executable(programa ${sources})
-target_link_libraries(programa 
-                    gtest
-                    gmock
-                    pthread)
+    src/main.cpp
+    src/Bitmap.cpp
+    src/FractalCreator.cpp
+    src/RGB.cpp
+    src/Mandelbrot.cpp
+    src/ZoomList.cpp)
 
-include(GoogleTest)
-gtest_discover_tests(programa)
+add_executable(DrawFractal ${sources})
+
+target_link_libraries(DrawFractal 
+                    #gtest
+                    #gmock
+                    pthread)
